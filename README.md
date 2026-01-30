@@ -22,3 +22,6 @@ The system is designed to follow a **stage-by-stage development approach**:
 - Vision-laser closed-loop feedback
 - Support for hardware-specific laser control software (e.g. SAMLight)
 
+## Author
+Kyungwoo Lee  
+Undergraduate Student, Mechanical Engineering
