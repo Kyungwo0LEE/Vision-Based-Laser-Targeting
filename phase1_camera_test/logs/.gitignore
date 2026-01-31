@@ -1,0 +1,3 @@
+# Local experiment logs
+logs/*.csv
+logs/**/*.csv
