@@ -25,7 +25,7 @@ The system is designed to follow a **stage-by-stage development approach**:
 ```bash
 pip install -r phase1_camera_test/requirements.txt
 python phase1_camera_test/main.py
-'''
+```
 
 ### Demo (Phase 1)
 
