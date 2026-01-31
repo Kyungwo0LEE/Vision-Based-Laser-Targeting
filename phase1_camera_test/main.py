@@ -1,4 +1,11 @@
-﻿import cv2
+"""
+Phase 1: Camera Test & Vision Validation
+-Circular target detection
+-Coordinate calibration
+-Vision-only tracking (no laser)
+"""
+
+import cv2
 
 from vision.camera import open_camera
 from vision.detect_circle import detect_circles
@@ -16,10 +23,10 @@ def main():
     frame_count = 0
     params = None
 
-    print("조작 방법:")
-    print(" c : 캘리브레이션")
-    print(" t : 트래킹 ON/OFF")
-    print(" ESC : 종료")
+    print("조작 방법:")            # How to Use
+    print(" c : 캘리브레이션")     # Calibration : c
+    print(" t : 트래킹 ON/OFF")   # Tracking : t
+    print(" ESC : 종료")          # Exit : ESC
 
     while True:
         ret, frame = cap.read()         #카메라 프레임 읽기 및 성공 여부 확인
@@ -64,3 +71,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
