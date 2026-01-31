@@ -16,6 +16,24 @@ The system is designed to follow a **stage-by-stage development approach**:
 - Linear coordinate calibration (camera-->laser space)
 - Real-time target tracking (vision only)
 
+### Phase 1 Implementation Details
+- Vision modules are organized under the `vision/` package.
+- Calibration and tracking results are logged locally as CSV files.
+- No laser hardware is required for this phase.
+
+### How to Run Phase 1
+```bash
+pip install -r phase1_camera_test/requirements.txt
+python phase1_camera_test/main.py
+
+### Demo (Phase 1)
+
+![Phase 1 Demo](docs/phase1_demo.gif)
+
+The demo above shows real-time circular target detection and vision-only tracking
+using a live camera feed.
+
+
 ## Phase 2: Laser Integration
 - Laser control backend integration
 - Real-time laser firing on tracked targets
