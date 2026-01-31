@@ -1,7 +1,7 @@
 # Vision-Based-Laser-Targeting
 Camera-based circular target detection and coordinate calibration for a vision-guided laser targeting system.
 
-This project develops a vision-based laser targeting system that detects circular targets using a camera, performs coordinate calibration, and ultimately aims to fire a laser to track targets in real tiem.
+This project develops a vision-based laser targeting system that detects circular targets using a camera, performs coordinate calibration, and ultimately aims to fire a laser to track targets in real time.
 
 ## Project Overview
 The system is designed to follow a **stage-by-stage development approach**:
@@ -13,7 +13,7 @@ The system is designed to follow a **stage-by-stage development approach**:
 - Camera connection and live video streaming
 - Circular target detection using OpenCV (Hough Transform)
 - Camera coordinate normalization
-- Linear coordinate calibration (camera-->laser space)
+- Linear coordinate calibration (camera → laser space)
 - Real-time target tracking (vision only)
 
 ### Phase 1 Implementation Details
