@@ -131,7 +131,7 @@ namespace WindowsFormsApp3
         }
         #endregion
 
-        // ✅ 실제 사용하는 컨트롤만 선언
+        //
         private System.Windows.Forms.Button btn_Init;
         private System.Windows.Forms.Button btnarm;
         private System.Windows.Forms.Button btn_stop;
