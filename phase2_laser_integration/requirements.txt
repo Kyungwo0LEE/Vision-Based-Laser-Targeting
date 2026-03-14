@@ -1,0 +1,6 @@
+opencv-python
+numpy
+pandas
+json
+socket
+time
