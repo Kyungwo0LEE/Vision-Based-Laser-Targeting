@@ -1,7 +1,6 @@
 # System Architecture
 
-The vision-guided laser targeting system separates **vision processing** and **laser control**
-to ensure stable operation with SAMLight hardware.
+The vision-guided laser targeting system separates **vision processing** and **laser control** to ensure stable operation with SAMLight hardware.
 
 ```mermaid
 flowchart LR
