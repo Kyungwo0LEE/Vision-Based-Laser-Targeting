@@ -30,6 +30,9 @@ This modular architecture improves stability, avoids direct Python–COM issues,
 
 The demo above shows real-time circular target detection and tracking using the camera-based vision pipeline.
 
+## Experimental Setup
+![System Setup](docs/system_setup.jpg)
+
 ---
 
 ## System Architecture
