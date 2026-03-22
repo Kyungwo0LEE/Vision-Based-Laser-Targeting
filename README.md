@@ -1,4 +1,4 @@
-# Vision-Based-Laser-Targeting
+# Vision-Guided-Laser-Targeting
 
 A real-time vision-based laser targeting system using **Python/OpenCV** for circular target detection and **C# + SAMLight** for stable laser control.
 
