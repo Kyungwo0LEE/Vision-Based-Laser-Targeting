@@ -57,9 +57,6 @@ Laser Marking
 ## Project Structure
 
 ```bash
-## Project Structure
-
-```bash
 Vision-Based-Laser-Targeting/
 ├── docs/
 │   ├── phase1_demo.gif
