@@ -171,6 +171,8 @@ This prevents invalid commands from being sent to SAMLight and improves overall 
 
 #### 2. Random single-target transmission policy
 
+This policy was validated in multi-target scenes where several circular candidates were present simultaneously, and one valid target was randomly selected for transmission.
+
 Even if multiple circular targets are detected in a single frame, the Python side sends only **one target** at a time.
 
 The target is selected **randomly** from the valid detected targets.
