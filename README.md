@@ -1,101 +1,291 @@
 # Vision-Based-Laser-Targeting
-Camera-based circular target detection and coordinate calibration for a vision-guided laser targeting system.
 
-This project develops a vision-based laser targeting system that detects circular targets using a camera, performs coordinate calibration, and ultimately aims to fire a laser to track targets in real time.
+A real-time vision-based laser targeting system using **Python/OpenCV** for circular target detection and **C# + SAMLight** for stable laser control.
 
-## Project Overview
-The system is designed to follow a **stage-by-stage development approach**:
-1. Camera Test & Vision Validation
-2. Laser Control Integration
-3. Vision-Guided Laser Targeting with Feedback
+## Overview
 
-The project is designed with a modular architecture separating:
+This project implements a **vision-guided laser targeting system** that detects circular targets from a live camera feed, transforms image coordinates into calibrated laser coordinates, and transmits the processed target position to a SAMLight-based laser controller.
 
-- Vision processing (Python / OpenCV)  
-- Laser control backend (C# / SAMLight OCX)  
-- Future inter-process communication bridge  
+The system was developed in a step-by-step workflow:
+
+1. **Phase 1** – Camera test and vision validation  
+2. **Phase 2** – Laser integration and real-time targeting  
+3. **SAMLight Controller** – Dedicated C# controller for stable laser execution  
+
+The final system separates:
+
+- **Vision processing** in Python using OpenCV  
+- **Laser control** in C# using SAMLight OCX / Client Control Interface  
+- **Real-time communication** via TCP socket  
+
+This modular architecture improves stability, avoids direct Python–COM issues, and reflects the practical constraints of industrial laser control software.
 
 ---
 
-## Phase 1: Camera Test (Completed)
+## Demo
 
-### Features
+![Phase 1 Demo](docs/phase1_demo.gif)
+
+The demo above shows real-time circular target detection and tracking using the camera-based vision pipeline.
+
+---
+
+## System Architecture
+
+Detailed architecture: [docs/system_architecture.md](docs/system_architecture.md)
+
+Final system flow:
+
+```text
+Camera
+   ↓
+Python Vision Processing
+   ├─ Circle detection
+   ├─ Coordinate calibration
+   ├─ Out-of-range filtering
+   └─ Random single-target selection
+   ↓
+TCP Communication
+   ↓
+C# SAMLight Controller
+   ↓
+Laser Marking
+```
+
+---
+
+## Project Structure
+
+```bash
+Vision-Based-Laser-Targeting/
+├── docs/
+│   ├── phase1_demo.gif
+│   └── system_architecture.md
+│
+├── phase1_camera_test/
+│   ├── logs/
+│   ├── vision/
+│   │   ├── calibration.py
+│   │   ├── camera.py
+│   │   ├── detect_circle.py
+│   │   ├── entity.py
+│   │   ├── entity_factory.py
+│   │   ├── logger.py
+│   │   └── transform.py
+│   ├── main.py
+│   └── requirements.txt
+│
+├── phase2_laser_integration/
+│   ├── control/
+│   │   └── laser_client.py
+│   ├── vision/
+│   │   ├── calibration.py
+│   │   ├── camera.py
+│   │   ├── detect_circle.py
+│   │   ├── entity.py
+│   │   ├── entity_factory.py
+│   │   ├── logger.py
+│   │   └── transform.py
+│   ├── main_laser_tracking.py
+│   └── requirements.txt
+│
+├── samlight_controller/
+│   ├── SamlightLaserController.sln
+│   └── SamlightLaserController/
+│       ├── Program.cs
+│       ├── Form1.cs
+│       ├── Form1.Designer.cs
+│       ├── Form1.resx
+│       ├── SamlightLaserController.csproj
+│       ├── App.config
+│       ├── packages.config
+│       └── Properties/
+│
+├── .gitignore
+├── LICENSE
+└── README.md
+```
+
+---
+
+## Phase 1: Camera Test and Vision Validation
+
+### Objective
+
+Validate the vision pipeline independently before integrating the laser hardware.
+
+### Implemented Features
 
 - Camera connection and live video streaming  
-- Circular target detection using OpenCV (Hough Transform)  
-- Camera coordinate normalization  
-- Linear coordinate calibration (camera → laser space)  
-- Real-time target tracking (vision only)  
+- Circular target detection using OpenCV  
+- Real-time target visualization  
+- Coordinate normalization  
+- Camera-to-laser coordinate calibration  
 - CSV logging of calibration and tracking data  
 
-### Implementation Details
+### Result
 
-- Vision modules are organized under the `vision/` package.  
-- Calibration parameters (a, b, c, d) are computed from 3-point reference alignment.  
-- Tracking results are logged locally for reproducibility.  
-- No laser hardware is required for this phase.  
+The vision system successfully detected circular targets and produced calibrated coordinates without requiring laser hardware.
 
-### How to Run Phase 1
+**Status:** ✅ Completed
+
+### Run
+
 ```bash
 pip install -r phase1_camera_test/requirements.txt
 python phase1_camera_test/main.py
 ```
 
-### Demo (Phase 1)
-
-![Phase 1 Demo](docs/phase1_demo.gif)
-
-The demo above shows real-time circular target detection and vision-only tracking
-using a live camera feed.
-
 ---
-## Phase 2: Laser Integration (Partially Verified)
+
+## Phase 2: Laser Integration and Real-Time Targeting
 
 ### Objective
 
-Integrate the vision-based coordinate system with laser control software and enable real-time laser firing on tracked targets.
+Integrate the Python vision pipeline with the SAMLight laser control environment and validate the full real-time camera-to-laser targeting loop.
 
-### Current Status
+### Implemented Features
 
-- SAMLight integration via C# (WinForms + OCX): ✅ Verified
-- Laser entity creation and marking test: ✅ Verified
-- Direct Python → SAMLight COM control: ❌ Not supported / unstable
+- Real-time transmission of transformed target coordinates from Python to C#  
+- Continuous coordinate reception and execution in the SAMLight controller  
+- End-to-end camera-to-laser targeting pipeline validation  
+- Live laser targeting based on camera-detected circular targets  
+- SAMLight integration through **C# WinForms + OCX**  
+- Entity creation and marking test in SAMLight  
 
-SAMLight is built on an ActiveX (OCX) architecture primarily designed for .NET (C#) environments.
-Direct COM control from Python was tested but resulted in instability due to threading and ActiveX constraints.
+### Important Python-Side Improvements
 
-### Technical Findings
+To make the system stable in practice, the Python pipeline was modified to reflect real laser control constraints.
 
-- SAMLight OCX operates reliably inside a WinForms (.NET) environment.
-- Python-based COM access through pywin32 is not officially supported.
-- Stable laser control requires a dedicated C# controller application.
+#### 1. Out-of-range coordinate rejection
 
-### Architecture Decision
+Targets whose transformed coordinates fall outside the valid working range are discarded before transmission.
 
-To ensure stability and hardware safety, the system architecture will follow:
+This prevents invalid commands from being sent to SAMLight and improves overall system stability.
 
-Python (Vision Processing)
-→ C# Laser Controller (SAMLight OCX)
-→ Laser Hardware
+#### 2. Random single-target transmission policy
 
-A TCP-based communication bridge between Python and C# will be implemented in the next stage.
+Even if multiple circular targets are detected in a single frame, the Python side sends only **one target** at a time.
 
-### Why This Approach?
+The target is selected **randomly** from the valid detected targets.
 
-- Prevents COM threading conflicts
-- Maintains compatibility with SAMLight’s intended API usage
-- Enables modular system expansion
-- Aligns with industrial vision–laser system design practices
+This was an intentional design choice because the SAMLight marking process takes approximately **1–2 seconds per target** in the current setup.  
+Sending multiple targets continuously would create a mismatch between detection speed and actual marking speed.
+
+For this reason, the system prioritizes **stable one-target-at-a-time execution** over raw multi-target throughput.
+
+### Key Technical Decision
+
+Direct Python control of SAMLight through COM was tested, but it was not stable enough for reliable operation.
+
+Because of this, the project adopted the following structure:
+
+```text
+Python Vision
+   ↓
+TCP Socket
+   ↓
+C# SAMLight Controller
+   ↓
+Laser Hardware
+```
+
+This design significantly improved operational stability and matched the intended usage of the SAMLight control interface.
+
+### Result
+
+The full real-time vision-to-laser pipeline was successfully implemented and verified.
+
+**Status:** ✅ Completed
+
+### Run
+
+```bash
+pip install -r phase2_laser_integration/requirements.txt
+python phase2_laser_integration/main_laser_tracking.py
+```
 
 ---
 
-### Next Step (Phase 3)
+## SAMLight Controller
 
-- Implement TCP-based communication between Python and C#
-- Transmit real-time transformed coordinates
-- Execute stable laser marking sequence
-- Validate vision–laser synchronization
+The `samlight_controller/` directory contains the dedicated C# WinForms controller used to operate SAMLight reliably.
+
+### Role
+
+- Receive coordinates from Python through TCP  
+- Interface with SAMLight through the OCX-based control environment  
+- Execute stable marking commands on the laser hardware  
+
+### Why a Separate Controller?
+
+A dedicated C# controller provided significantly more stable hardware interaction than direct Python-side COM access and better matched the intended Windows-based SAMLight workflow.
+
+---
+
+## Technical Stack
+
+### Vision Processing
+
+- Python  
+- OpenCV  
+- NumPy  
+
+### Laser Control
+
+- C#  
+- .NET WinForms  
+- SAMLight OCX / Client Control Interface  
+
+### Communication
+
+- TCP socket communication between Python and C#  
+
+---
+
+## Engineering Notes
+
+### Why not control SAMLight directly from Python?
+
+Direct Python-side COM control was tested, but reliable operation was not achieved in practice.  
+A dedicated C# controller provided much more stable interaction with SAMLight.
+
+### Why reject out-of-range targets before transmission?
+
+Filtering invalid coordinates on the Python side simplifies the system, reduces unnecessary communication, and helps avoid hardware-side errors.
+
+### Why send only one randomly selected target at a time?
+
+The camera can detect multiple targets much faster than the laser can physically complete a marking operation.  
+Because one marking cycle takes about **1–2 seconds**, sending only one randomly selected valid target per cycle was a more stable and practical strategy.
+
+---
+
+## Achievements
+
+- Built a modular vision-guided laser targeting pipeline  
+- Verified real-time circular target detection from live camera input  
+- Implemented calibration from camera space to laser space  
+- Established TCP-based communication between Python and C#  
+- Integrated SAMLight through a dedicated C# controller  
+- Added practical filtering logic for hardware-safe operation  
+- Implemented random single-target selection for stable marking execution  
+- Completed end-to-end real-time vision-guided laser targeting  
+
+---
+
+## Future Improvements
+
+- Smarter target prioritization beyond random selection  
+- Queue-based sequential marking logic  
+- Faster end-to-end response  
+- Improved calibration precision  
+- Additional safety and arming logic  
+- Expanded logging and GUI tools  
+
+---
 
 ## Author
-Kyungwoo Lee  
+
+**Kyungwoo Lee**  
 Undergraduate Student, Mechanical Engineering
