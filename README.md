@@ -271,6 +271,7 @@ Because one marking cycle takes about **1–2 seconds**, sending only one random
 
 ![Laser Marking Result](docs/laser_marking_result.jpg)
 Physical validation of the camera-to-laser targeting pipeline through real laser marking on the target surface.
+The dark circular regions indicate material removal caused by laser marking, showing that the detected target coordinates were successfully transformed, transmitted to the SAMLight controller, and executed on a physical sample.
 
 ## Achievements
 
