@@ -57,6 +57,9 @@ Laser Marking
 ## Project Structure
 
 ```bash
+## Project Structure
+
+```bash
 Vision-Based-Laser-Targeting/
 ├── docs/
 │   ├── phase1_demo.gif
@@ -90,16 +93,17 @@ Vision-Based-Laser-Targeting/
 │   └── requirements.txt
 │
 ├── samlight_controller/
-│   ├── SamlightLaserController.sln
 │   └── SamlightLaserController/
-│       ├── Program.cs
-│       ├── Form1.cs
-│       ├── Form1.Designer.cs
-│       ├── Form1.resx
-│       ├── SamlightLaserController.csproj
-│       ├── App.config
-│       ├── packages.config
-│       └── Properties/
+│       ├── WindowsFormsApp3/
+│       │   ├── Program.cs
+│       │   ├── Form1.cs
+│       │   ├── Form1.Designer.cs
+│       │   ├── Form1.resx
+│       │   ├── WindowsFormsApp3.csproj
+│       │   ├── App.config
+│       │   ├── packages.config
+│       │   └── Properties/
+│       └── WindowsFormsApp3.sln
 │
 ├── .gitignore
 ├── LICENSE
