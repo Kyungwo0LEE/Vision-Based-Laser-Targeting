@@ -274,6 +274,14 @@ Physical validation of the camera-to-laser targeting pipeline through real laser
 
 The dark circular regions indicate material removal caused by laser marking, showing that the detected target coordinates were successfully transformed, transmitted to the SAMLight controller, and executed on a physical sample.
 
+## Integration Demo
+
+![Integration Demo](docs/laser_integration_demo.gif)
+
+This demo shows the real-time integration workflow between the Python vision pipeline, the C# SAMLight controller, and the SAMLight monitoring environment.
+
+The sequence demonstrates that target information detected in Python is transmitted through TCP, received by the C# controller, and reflected in the laser control system during live operation.
+
 ## Achievements
 
 - Built a modular vision-guided laser targeting pipeline  
