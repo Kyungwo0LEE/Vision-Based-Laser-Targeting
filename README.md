@@ -64,8 +64,11 @@ Laser Marking
 ```bash
 Vision-Based-Laser-Targeting/
 ├── docs/
+│   ├── laser_integration_demo.gif
+│   ├── laser_marking_result.jpg
 │   ├── phase1_demo.gif
-│   └── system_architecture.md
+│   ├── system_architecture.md
+│   └── system_setup.jpg
 │
 ├── phase1_camera_test/
 │   ├── logs/
