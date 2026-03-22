@@ -299,12 +299,11 @@ The sequence demonstrates that target information detected in Python is transmit
 
 ## Future Improvements
 
-- Smarter target prioritization beyond random selection  
-- Queue-based sequential marking logic  
-- Faster end-to-end response  
-- Improved calibration precision  
-- Additional safety and arming logic  
-- Expanded logging and GUI tools  
+- Quantitative calibration error analysis between camera space and laser space
+- Latency measurement across detection, transmission, and laser execution stages
+- Smarter target prioritization beyond random selection
+- Queue-based sequential marking for multiple detected targets
+- Closed-loop feedback using post-marking visual verification
 
 ---
 
