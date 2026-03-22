@@ -308,6 +308,12 @@ The sequence demonstrates that target information detected in Python is transmit
 
 ---
 
+## Project Context
+
+This project was independently developed by the author in a laboratory research environment in Prof. Jung Bin In's group, where access to the SAMLight-based laser system enabled practical validation of the vision-guided targeting pipeline.
+
+---
+
 ## Author
 
 **Kyungwoo Lee**  
