@@ -267,6 +267,11 @@ Because one marking cycle takes about **1–2 seconds**, sending only one random
 
 ---
 
+## Experimental Result
+
+![Laser Marking Result](docs/laser_marking_result.jpg)
+Physical validation of the camera-to-laser targeting pipeline through real laser marking on the target surface.
+
 ## Achievements
 
 - Built a modular vision-guided laser targeting pipeline  
