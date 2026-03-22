@@ -23,7 +23,7 @@ F[C# WinForms Controller]
 G[SAMLight OCX API]
 end
 
-H[Galvo Laser Scanner]
+H[Laser Hardware]
 
 Camera --> A
 A --> B
