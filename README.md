@@ -32,46 +32,7 @@ The demo above shows real-time circular target detection and tracking using the 
 
 ## System Architecture
 
-```markdown
-## System Architecture
-
-```mermaid
-flowchart LR
-
-Camera[Camera Input]
-
-subgraph Python_Vision_System
-A[OpenCV Circle Detection]
-B[Coordinate Calibration]
-C[Coordinate Transformation]
-D[Out-of-Range Filtering]
-E[Random Single-Target Selection]
-end
-
-subgraph Communication
-F[TCP Socket]
-end
-
-subgraph Laser_Controller_CSharp
-G[C# WinForms Controller]
-H[SAMLight OCX API]
-end
-
-I[Laser Hardware]
-
-Camera --> A
-A --> B
-B --> C
-C --> D
-D --> E
-E --> F
-F --> G
-G --> H
-H --> I
-```
-
-Detailed version: [docs/system_architecture.md](docs/system_architecture.md)
-```
+Detailed architecture: [docs/system_architecture.md](docs/system_architecture.md)
 
 Final system flow:
 
