@@ -4,6 +4,7 @@ A real-time vision-based laser targeting system using **Python/OpenCV** for circ
 
 ## Overview
 
+This project is not only a computer vision demo, but an end-to-end hardware integration system that connects real-time target detection, coordinate calibration, inter-process communication, and industrial laser control.
 This project implements a **vision-guided laser targeting system** that detects circular targets from a live camera feed, transforms image coordinates into calibrated laser coordinates, and transmits the processed target position to a SAMLight-based laser controller.
 
 The system was developed in a step-by-step workflow:
