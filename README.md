@@ -297,6 +297,35 @@ The sequence demonstrates that target information detected in Python is transmit
 
 ---
 
+## Key Contributions
+
+- Designed and implemented an end-to-end vision-guided laser targeting system from camera-based target detection to physical laser execution
+- Built a modular Python vision pipeline for circular target detection, coordinate calibration, and coordinate transformation
+- Developed a TCP-based communication workflow between the Python vision system and the C# SAMLight controller
+- Identified instability in direct Python-to-SAMLight control and replaced it with a more reliable C#-based control architecture
+- Added hardware-aware filtering logic, including out-of-range rejection and random single-target selection
+- Validated the complete camera-to-laser workflow through real laser marking experiments on a physical sample
+
+---
+
+## My Role
+
+I independently designed and implemented the Python-based vision pipeline, including circular target detection, calibration, coordinate transformation, and target selection logic.
+
+I also developed the communication workflow between Python and the C# controller, implemented and tested the SAMLight control interface in C#, and validated the end-to-end system through real laser marking experiments.
+
+---
+
+## Lessons Learned
+
+- Real-time computer vision performance and laser execution speed must be balanced at the system level
+- Reliable hardware control often requires architecture decisions beyond the vision algorithm itself
+- Filtering and target selection logic are critical for stable operation in real experimental environments
+- Direct software control paths that appear simpler are not always the most robust in hardware-integrated systems
+- End-to-end validation with physical marking is essential to confirm that software outputs translate into real hardware behavior
+
+---
+
 ## Future Improvements
 
 - Quantitative calibration error analysis between camera space and laser space
